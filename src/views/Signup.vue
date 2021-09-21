@@ -1,6 +1,6 @@
 <template>
-  <div class="home-view__container">
-    <h1>Home</h1>
+  <div class="signup-view__container">
+    <h1>Aqui te puedes registrar</h1>
   </div>
 </template>
 
@@ -8,5 +8,5 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component({})
-export default class Home extends Vue {}
+export default class Signup extends Vue {}
 </script>
