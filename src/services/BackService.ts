@@ -43,4 +43,8 @@ export default class BackService {
   createPriceAlert(create_params: CreateAlertParams) {
     return this.apiBack.post('/price_alerts', create_params)
   }
+
+  getPriceAlerts(id: number) {
+    return this.apiBack.get('/price_alerts/find_by_userid/' + id)
+  }
 }

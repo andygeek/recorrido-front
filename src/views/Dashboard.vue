@@ -13,6 +13,11 @@
 
       <button @click="createAlert">Crear alerta de precio</button>
       <p>Lista de alertas creadas de {{this.$store.state.user.name}}</p>
+      <template v-for="(e, i) in listAlerts">
+        <p :key="i">{{e}}</p>
+      </template>
+      <button @click="getAlerts">Actualizar</button>
+      
     </template>
   </div>
 </template>
@@ -31,6 +36,7 @@ export default class Dashboard extends Vue {
 
   service : BackService | null = null
 
+  listAlerts = []
 
   created() {
     this.service = new BackService();
@@ -54,5 +60,13 @@ export default class Dashboard extends Vue {
     }
   }
 
+  async getAlerts() {
+    try {
+      let priceAlertList = await this.service!.getPriceAlerts(this.$store.state.user.id)
+      this.listAlerts = priceAlertList.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
 </script>
