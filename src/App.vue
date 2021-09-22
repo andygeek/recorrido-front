@@ -1,20 +1,31 @@
 <template>
   <div id="app" class="recorrido-app__container">
     <div class="recorrido-app__content">
-      <div id="nav" class="recorrido-navbar__container">
-        <router-link to="/">recorrido.cl</router-link>
-        <router-link to="/login">Ingresar</router-link>
-        <router-link to="/signup">Registrarse</router-link>
-        <router-link to="/dashboard">Dashboard</router-link>
-      </div>
+      <view-navbar></view-navbar>
       <div class="recorrido-body__container">
         <router-view/>
       </div>
     </div>
   </div>
 </template>
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import ViewNavbar from '@/components/views/Navbar.vue'
+
+@Component({
+  components: {
+    ViewNavbar
+  }
+})
+export default class App extends Vue {
+
+}
+</script>
 
 <style>
+a {
+  text-decoration: none !important;
+}
 .recorrido-app__container {
   display: flex;
   justify-content: center;
