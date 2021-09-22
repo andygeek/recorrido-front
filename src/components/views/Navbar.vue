@@ -39,11 +39,24 @@ export default class ViewNavbar extends Vue {
   }
   .navbar-logo__text-logo {
     font-weight: bold;
-    font-size: 25px;
+    font-size: 30px;
+    color: white;
   }
   .navbar-item {
     display: flex;
     align-items: center;
     font-weight: bold;
+  }
+</style>
+<style>
+  .navbar-item a {
+    color: white;
+    background-color:#ffffff2e;
+    border-radius: 6px;
+    padding-inline: 10px;
+    padding-block: 3px;
+  }
+  .navbar-item a:hover {
+    background-color:#ffffff4d;
   }
 </style>

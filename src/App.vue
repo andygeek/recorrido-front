@@ -26,7 +26,13 @@ export default class App extends Vue {
 a {
   text-decoration: none !important;
 }
+body {
+  margin: 0px;
+}
 .recorrido-app__container {
+  background-image: url(https://www.wallpapertip.com/wmimgs/81-817636_mountain-road-background.jpg);
+  background-size: cover;
+  height: 100vh;
   display: flex;
   justify-content: center;
 }
