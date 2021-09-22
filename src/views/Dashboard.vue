@@ -1,6 +1,8 @@
 <template>
   <div class="dashboard-view__container">
-    <h1>Este es el dashboard de la web</h1>
+    <h1>Este es el dashboard más básico</h1>
+    <p>Los datos del usuario</p>
+    <p>{{this.$store.state.user}}</p>
   </div>
 </template>
 

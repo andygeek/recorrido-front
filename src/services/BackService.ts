@@ -1,5 +1,10 @@
 import axios, { AxiosInstance } from 'axios';
 
+interface SingupParams {
+  name: string,
+  username: string,
+  password: string,
+}
 interface LoginParams {
   username: string,
   password: string,
@@ -19,7 +24,11 @@ export default class BackService {
     })
   }
 
-  signup(login_params: LoginParams) {
-    return this.apiBack.post('/users/signup', login_params)
+  signup(signup_params: SingupParams) {
+    return this.apiBack.post('/users/signup', signup_params)
+  }
+  
+  login(login_params: LoginParams) {
+    return this.apiBack.post('/users/login', login_params)
   }
 }

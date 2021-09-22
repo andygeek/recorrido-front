@@ -45,6 +45,7 @@ export default class Signup extends Vue {
         password: this.password
       }
       let user = await this.service!.signup(body)
+      this.$store.commit('setUser', user.data)
     } catch (error) {
       console.log(error)
     }
