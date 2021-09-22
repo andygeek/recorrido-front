@@ -1,34 +1,25 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Inicio</router-link> |
-      <router-link to="/login">Ingresar</router-link> |
-      <router-link to="/signup">Registrarse</router-link> |
-      <router-link to="/dashboard">Dashboard</router-link>
+  <div id="app" class="recorrido-app__container">
+    <div class="recorrido-app__content">
+      <div id="nav" class="recorrido-navbar__container">
+        <router-link to="/">recorrido.cl</router-link>
+        <router-link to="/login">Ingresar</router-link>
+        <router-link to="/signup">Registrarse</router-link>
+        <router-link to="/dashboard">Dashboard</router-link>
+      </div>
+      <div class="recorrido-body__container">
+        <router-view/>
+      </div>
     </div>
-    <router-view/>
   </div>
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.recorrido-app__container {
+  display: flex;
+  justify-content: center;
 }
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.recorrido-app__content {
+  width: 900px;
 }
 </style>
