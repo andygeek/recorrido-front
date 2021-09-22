@@ -39,4 +39,7 @@ body {
 .recorrido-app__content {
   width: 900px;
 }
+.recorrido-body__container {
+  height: calc(100% - 100px);
+}
 </style>
