@@ -1,5 +1,5 @@
 <template>
-  <div class="login-view__container">
+  <div class="login-view__container animate__animated animate__fadeInLeft">
     <div class="login-view__form-block">
       <h2 class="login-view__title-text">Ingresar</h2>
       <div class="login-view__form-container">
@@ -26,6 +26,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import BackService from '@/services/BackService'
+import 'animate.css';
 
 @Component({})
 export default class Login extends Vue {
