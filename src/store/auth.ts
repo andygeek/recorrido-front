@@ -46,6 +46,23 @@ const AuthModule : Module<AuthState, RootState> = {
       } catch(e) {
         console.log('Error: ', e)
       }
+    },
+    async signup({ commit }, user ) {
+      try {
+        const res = await fetch(process.env.VUE_APP_BACKBASE + '/users/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },  
+          body: JSON.stringify(user)
+        })
+        const userDB = await res.json()
+        commit('setToken', userDB.token)
+        commit('setUser', { name: userDB.name, email: userDB.email })
+        localStorage.setItem('token', userDB.token)
+      } catch (error) {
+        console.log('Error: ', error)
+      }
     }
   },
 }

@@ -44,18 +44,8 @@ export default class Signup extends Vue {
   }
 
   async signup() {
-    console.log(this.name, this.email, this.password);
-    try {
-      let body = {
-        name: this.name,
-        email: this.email,
-        password: this.password
-      }
-      let user = await this.service!.signup(body)
-      this.$store.commit('setUser', user.data)
-    } catch (error) {
-      console.log(error)
-    }
+    let body = { user: { name: this.name, email: this.email, password: this.password } }
+    await this.$store.dispatch('auth/signup', body)
   }
 }
 </script>
