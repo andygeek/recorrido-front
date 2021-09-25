@@ -40,19 +40,8 @@ export default class Login extends Vue {
   }
 
   async login() {
-    console.log(this.email, this.password);
-    try {
-      let body = {
-        email: this.email,
-        password: this.password
-      }
-      // Save user in Vuex State
-      let user = await this.service!.login(body)
-      console.log(user)
-      this.$store.commit('setUser', user.data)
-    } catch (error) {
-      console.log(error)
-    }
+    let body = { user: { email: this.email, password: this.password } }
+    await this.$store.dispatch('auth/login', body)
   }
 
 }

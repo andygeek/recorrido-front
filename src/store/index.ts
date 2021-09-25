@@ -1,19 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import AuthModule from './auth'
 
 Vue.use(Vuex)
 
+export interface RootState {
+  version: string
+}
+
+const initialState : RootState = {
+  version: '1.0.0'
+}
+
 export default new Vuex.Store({
-  state: {
-    user: {}
-  },
-  mutations: {
-    setUser (state, payload) {
-      state.user = payload
-    },
-  },
-  actions: {
-  },
+  state: initialState,
   modules: {
+    auth: AuthModule
   }
 })
