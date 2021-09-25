@@ -5,7 +5,7 @@
       <div class="login-view__form-container">
         <div class="login-view__input-container">
           <span class="login-view__label-text">Email:</span>
-          <input class="login-view__input-text" type="text" v-model="username">
+          <input class="login-view__input-text" type="text" v-model="email">
         </div>
         <div class="login-view__input-container">
           <span class="login-view__label-text">Password:</span>

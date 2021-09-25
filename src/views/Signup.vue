@@ -9,7 +9,7 @@
         </div>
         <div class="signup-view__input-container">
           <span class="signup-view__label-text">Email:</span>
-          <input class="signup-view__input-text" type="text" v-model="username">
+          <input class="signup-view__input-text" type="text" v-model="email">
         </div>
         <div class="signup-view__input-container">
           <span class="signup-view__label-text">Password:</span>

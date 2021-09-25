@@ -3,7 +3,7 @@
     <h1>Este es el dashboard más básico</h1>
     <p>Los datos del usuario</p>
     <p>{{this.$store.state.user}}</p>
-    <template v-if="this.$store.state.user.username">
+    <template v-if="this.$store.state.user.email">
       
       <input type="text" v-model="name">
       <input type="text" v-model="originId">
