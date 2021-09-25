@@ -41,5 +41,8 @@ body {
 }
 .recorrido-body__container {
   height: calc(100% - 100px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
