@@ -2,11 +2,11 @@ import axios, { AxiosInstance } from 'axios';
 
 interface SingupParams {
   name: string,
-  username: string,
+  email: string,
   password: string,
 }
 interface LoginParams {
-  username: string,
+  email: string,
   password: string,
 }
 interface CreateAlertParams {

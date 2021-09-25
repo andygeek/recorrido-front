@@ -4,7 +4,7 @@
       <h2 class="login-view__title-text">Ingresar</h2>
       <div class="login-view__form-container">
         <div class="login-view__input-container">
-          <span class="login-view__label-text">Username:</span>
+          <span class="login-view__label-text">Email:</span>
           <input class="login-view__input-text" type="text" v-model="username">
         </div>
         <div class="login-view__input-container">
@@ -30,7 +30,7 @@ import 'animate.css';
 
 @Component({})
 export default class Login extends Vue {
-  username: string = ''
+  email: string = ''
   password: string = ''
 
   service : BackService | null = null
@@ -40,10 +40,10 @@ export default class Login extends Vue {
   }
 
   async login() {
-    console.log(this.username, this.password);
+    console.log(this.email, this.password);
     try {
       let body = {
-        username: this.username,
+        email: this.email,
         password: this.password
       }
       // Save user in Vuex State

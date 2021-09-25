@@ -8,7 +8,7 @@
           <input class="signup-view__input-text" type="text" v-model="name">
         </div>
         <div class="signup-view__input-container">
-          <span class="signup-view__label-text">Username:</span>
+          <span class="signup-view__label-text">Email:</span>
           <input class="signup-view__input-text" type="text" v-model="username">
         </div>
         <div class="signup-view__input-container">
@@ -34,7 +34,7 @@ import BackService from '@/services/BackService'
 @Component({})
 export default class Signup extends Vue {
   name: string = ''
-  username: string = ''
+  email: string = ''
   password: string = ''
 
   service : BackService | null = null
@@ -44,11 +44,11 @@ export default class Signup extends Vue {
   }
 
   async signup() {
-    console.log(this.name, this.username, this.password);
+    console.log(this.name, this.email, this.password);
     try {
       let body = {
         name: this.name,
-        username: this.username,
+        email: this.email,
         password: this.password
       }
       let user = await this.service!.signup(body)
