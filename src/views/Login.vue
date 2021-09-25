@@ -1,5 +1,5 @@
 <template>
-  <div class="login-view__container animate__animated animate__fadeInLeft">
+  <div class="login-view__container animate__animated animate__flipInX">
     <div class="login-view__form-block">
       <h2 class="login-view__title-text">Ingresar</h2>
       <div class="login-view__form-container">
@@ -171,5 +171,4 @@ export default class Login extends Vue {
     margin-left: inherit;
   }
 }
-
 </style>
