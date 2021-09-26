@@ -1,16 +1,26 @@
 <template>
   <div class="string-field__container">
     <span class="string-field__label">{{name}}:</span>
-    <input class="string-field__input" type="search">
+    <input class="string-field__input" type="search" v-model="write">
   </div>
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 
 @Component({})
-export default class StringField extends Vue {
+export default class NumberField extends Vue {
   @Prop({ type: String, required: true }) name !: String
 
+  value : string = ''
+
+  set write(v: any) {
+    this.$emit('update:write', v)
+    this.value = v
+  }
+
+  get write() {
+    return this.value
+  }
 }
 </script>
 <style scoped>

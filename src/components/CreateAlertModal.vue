@@ -10,11 +10,11 @@
           <button type="button" class="create-modal__button-close" @click="closeModal">X</button>
         </header>
         <div class="create-modal__body">
-          <string-field name="Nombre"></string-field>
-          <select-field name="Origen" :list="cities"></select-field>
-          <select-field name="Destino" :list="cities"></select-field>
-          <select-field name="Clase" :list="classes"></select-field>
-          <number-field name="Precio"></number-field>
+          <string-field name="Nombre" :write.sync="name"></string-field>
+          <select-field name="Origen" :list="cities" :select.sync="origin_id"></select-field>
+          <select-field name="Destino" :list="cities" :select.sync="destiny_id"></select-field>
+          <select-field name="Clase" :list="classes" :select.sync="class_id"></select-field>
+          <number-field name="Precio" :write.sync="price"></number-field>
         </div>
         <div class="create-modal__footer">
           <button class="create-modal__button">Crear</button>
@@ -24,10 +24,10 @@
   </transition>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import SelectField from './fields/select.vue'
 import StringField from './fields/string.vue'
-import NumberField from './fields/string.vue'
+import NumberField from './fields/number.vue'
 import BackService from '@/services/BackService'
 import { City } from '@/models/City'
 import { Clase } from '@/models/Clase'
@@ -45,6 +45,13 @@ export default class CreateAlertModal extends Vue {
 
   service : BackService | null = null
   cities : City[] = []
+
+  name : string = ''
+  origin_id : number = 0
+  destiny_id : number = 0
+  class_id : number = 0
+  price : number = 0
+
   classes : Clase[] = [
     { id: 1, name: "Premium"},
     { id: 2, name: "Salón Cama"},
