@@ -1,6 +1,7 @@
 import { RootState } from '@/store/index'
 import { Module } from 'vuex'
 import { User } from '@/models/'
+import router from '../router'
 
 
 export interface AuthState {
@@ -47,6 +48,7 @@ const AuthModule : Module<AuthState, RootState> = {
         commit('setToken', userDB.token)
         commit('setUser', { name: userDB.name, email: userDB.email })
         localStorage.setItem('token', userDB.token)
+        router.push('/dashboard')
       } catch(e) {
         console.log('Error: ', e)
       }
@@ -64,6 +66,7 @@ const AuthModule : Module<AuthState, RootState> = {
         commit('setToken', userDB.token)
         commit('setUser', { name: userDB.name, email: userDB.email })
         localStorage.setItem('token', userDB.token)
+        router.push('/dashboard')
       } catch (error) {
         console.log('Error: ', error)
       }
@@ -94,6 +97,11 @@ const AuthModule : Module<AuthState, RootState> = {
       commit('logout')
     }
   },
+  getters: {
+    token(state) {
+      return state.token
+    }
+  }
 }
 
 export default AuthModule

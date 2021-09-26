@@ -6,10 +6,11 @@ Vue.use(Vuex)
 
 export interface RootState {
   version: string
+  auth?: any
 }
 
 const initialState : RootState = {
-  version: '1.0.0'
+  version: '1.0.0',
 }
 
 export default new Vuex.Store({

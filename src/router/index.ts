@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Signup from '../views/Signup.vue'
+import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -21,7 +22,8 @@ const routes: Array<RouteConfig> = [
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: Dashboard
+    component: Dashboard,
+    meta: { requireAuth: true }
   },
   {
     path: '/signup',
@@ -34,6 +36,17 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+// Checking if there is a token in the store
+router.beforeEach((to, from, next)=>{
+  const protectedRoute = to.matched.some(record => record.meta.requireAuth)
+  let token = store.state.auth.token
+  if (protectedRoute && (token == '' || token == null)) {
+    next({name: 'Home'})
+  } else {
+    next()
+  }
 })
 
 export default router

@@ -12,10 +12,10 @@
       <li class="navbar-item" v-if="activeSession">
         <router-link to="/signup">Registrarse</router-link>
       </li>
-      <li class="navbar-item">
+      <li class="navbar-item" v-if="!activeSession">
         <router-link to="/dashboard">Dashboard</router-link>
       </li>
-      <li class="navbar-item">
+      <li class="navbar-item" v-if="!activeSession">
         <button class="navbar-item__button" @click="logout">Cerrar Sesion</button>
       </li>
     </ul>
@@ -28,7 +28,9 @@ import { Component, Vue } from 'vue-property-decorator';
 export default class ViewNavbar extends Vue {
 
   get activeSession() {
-    if ( this.$store.state["auth"].user !== undefined ) return true
+    if ( this.$store.state["auth"].user == undefined ||
+      ( this.$store.state["auth"].user.name == undefined &&
+      this.$store.state["auth"].user.email == undefined )) return true
     return false
   }
 
