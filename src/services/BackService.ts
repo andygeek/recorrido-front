@@ -1,5 +1,4 @@
 import axios, { AxiosInstance } from 'axios';
-import store from '../store'
 
 interface CreateAlertParams {
   name: string,
@@ -31,5 +30,9 @@ export default class BackService {
 
   getPriceAlerts(id: number) {
     return this.apiBack.get('/price_alerts/find_by_userid/' + id)
+  }
+
+  getCities() {
+    return this.apiBack.get('/cities')
   }
 }

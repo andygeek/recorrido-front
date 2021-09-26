@@ -57,4 +57,8 @@ body {
 .navbar-item a:hover {
   background-color:#ffffff4d;
 }
+.vs__dropdown-toggle {
+  border: none !important;
+  border-radius: 4px !important;
+}
 </style>

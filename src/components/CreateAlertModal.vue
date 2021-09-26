@@ -11,9 +11,9 @@
         </header>
         <div class="create-modal__body">
           <string-field name="Nombre"></string-field>
-          <select-field name="Origen"></select-field>
-          <select-field name="Destino"></select-field>
-          <select-field name="Clase"></select-field>
+          <select-field name="Origen" :list="cities"></select-field>
+          <select-field name="Destino" :list="cities"></select-field>
+          <select-field name="Clase" :list="classes"></select-field>
           <number-field name="Precio"></number-field>
         </div>
         <div class="create-modal__footer">
@@ -28,6 +28,9 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 import SelectField from './fields/select.vue'
 import StringField from './fields/string.vue'
 import NumberField from './fields/string.vue'
+import BackService from '@/services/BackService'
+import { City } from '@/models/City'
+import { Clase } from '@/models/Clase'
 
 @Component({
   components: {
@@ -40,6 +43,16 @@ export default class CreateAlertModal extends Vue {
   @Prop({ type: Boolean, required: true }) open !: boolean
   @Prop({ type: String, required: false }) title !: String
 
+  service : BackService | null = null
+  cities : City[] = []
+  classes : Clase[] = [
+    { id: 1, name: "Premium"},
+    { id: 2, name: "Salón Cama"},
+    { id: 3, name: "Semi Cama"},
+    { id: 4, name: "Pullman"},
+    { id: 5, name: "Cualquiera"},
+  ]
+
   get modalOpen () {
     return this.open
   }
@@ -50,6 +63,15 @@ export default class CreateAlertModal extends Vue {
 
   closeModal() {
     this.modalOpen = false
+  }
+
+  created() {
+    this.service = new BackService(this.$store.state.auth.token)
+  }
+
+  async mounted() {
+    let response = await this.service?.getCities()
+    this.cities = response!.data.cities
   }
 }
 </script>
@@ -79,6 +101,7 @@ export default class CreateAlertModal extends Vue {
   border-radius: 8px;
   padding-left: 30px;
   padding-right: 30px;
+  overflow: inherit;
 }
 .create-modal__header {
   margin-top: 30px;

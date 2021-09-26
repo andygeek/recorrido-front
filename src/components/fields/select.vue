@@ -1,26 +1,36 @@
 <template>
   <div class="select-field__container">
     <span class="select-field__label">{{name}}:</span>
-    <input class="select-field__input" list="brow">
-    <datalist id="brow">
-      <option value="volvo"></option>
-      <option value="saab"></option>
-      <option value="mercedes"></option>
-      <option value="audi"></option>
-    </datalist>
+    <v-select v-model="selection" label="name" :options="list"></v-select>    
   </div>
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
+import { City } from '@/models/City'
 
 @Component({})
 export default class SelectField extends Vue {
   @Prop({ type: String, required: true }) name !: String
+  @Prop({ type: Array, required: false }) list !: Array<City>
 
+  select : any = null
+
+  set selection(v: any) {
+    this.select = v
+  }
+
+  get selection() {
+    return this.select
+  }
 
 }
 </script>
 <style scoped>
+.v-select {
+  width: 300px;
+  background-color: white;
+  border: none;
+}
 .select-field__container {
   display: flex;
   flex-direction: column;
