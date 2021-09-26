@@ -63,6 +63,28 @@ const AuthModule : Module<AuthState, RootState> = {
       } catch (error) {
         console.log('Error: ', error)
       }
+    },
+    async dashboard({ commit }, auth_token) {
+      try {
+        const res = await fetch(process.env.VUE_APP_BACKBASE + '/users/dashboard',  {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': auth_token
+          },
+        })
+        const userDB = await res.json()
+        commit('setUser', { name: userDB.name, email: userDB.email })
+      } catch (error) {
+        console.log('Error: ', error)
+      }
+    },
+    getToken({commit}) {
+      if(localStorage.getItem('token')) {
+        commit('setToken', localStorage.getItem('token'))
+      } else {
+        commit('setToken', null)
+      }
     }
   },
 }

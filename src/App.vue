@@ -18,7 +18,9 @@ import ViewNavbar from '@/components/views/Navbar.vue'
   }
 })
 export default class App extends Vue {
-
+  created() {
+    this.$store.dispatch('auth/getToken')
+  }
 }
 </script>
 
