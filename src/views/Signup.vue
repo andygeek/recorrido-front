@@ -29,19 +29,12 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import BackService from '@/services/BackService'
 
 @Component({})
 export default class Signup extends Vue {
   name: string = ''
   email: string = ''
   password: string = ''
-
-  service : BackService | null = null
-
-  created() {
-    this.service = new BackService();
-  }
 
   async signup() {
     let body = { user: { name: this.name, email: this.email, password: this.password } }

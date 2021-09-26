@@ -10,7 +10,11 @@
           <button type="button" class="create-modal__button-close" @click="closeModal">X</button>
         </header>
         <div class="create-modal__body">
-          <h1>ddd</h1>
+          <string-field name="Nombre"></string-field>
+          <select-field name="Origen"></select-field>
+          <select-field name="Destino"></select-field>
+          <select-field name="Clase"></select-field>
+          <number-field name="Precio"></number-field>
         </div>
       </div>
     </div>
@@ -18,8 +22,17 @@
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
+import SelectField from './fields/select.vue'
+import StringField from './fields/string.vue'
+import NumberField from './fields/string.vue'
 
-@Component
+@Component({
+  components: {
+    SelectField,
+    StringField,
+    NumberField
+  }
+})
 export default class CreateAlertModal extends Vue {
   @Prop({ type: Boolean, required: true }) open !: boolean
   @Prop({ type: String, required: false }) title !: String
@@ -50,19 +63,19 @@ export default class CreateAlertModal extends Vue {
   align-items: center;
 }
 .create-modal__container {
-  width: 600px;
+  width: 700px;
   right: auto;
   left: auto;
   top: auto;
   bottom: auto;
-  background: #ffffff;
+  background: #ebebebed;
   box-shadow: 2px 2px 20px 1px;
   overflow-x: auto;
   display: flex;
   flex-direction: column;
   border-radius: 8px;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 .create-modal__header {
   margin-top: 30px;
@@ -91,6 +104,8 @@ export default class CreateAlertModal extends Vue {
   display: flex;
   position: relative;
   padding: 20px 10px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 10px;
 }
-
 </style>

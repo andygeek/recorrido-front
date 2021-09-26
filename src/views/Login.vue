@@ -33,12 +33,6 @@ export default class Login extends Vue {
   email: string = ''
   password: string = ''
 
-  service : BackService | null = null
-
-  created() {
-    this.service = new BackService();
-  }
-
   async login() {
     let body = { user: { email: this.email, password: this.password } }
     await this.$store.dispatch('auth/login', body)
