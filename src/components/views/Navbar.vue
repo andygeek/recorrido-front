@@ -60,18 +60,6 @@ export default class ViewNavbar extends Vue {
     align-items: center;
     font-weight: bold;
   }
-</style>
-<style>
-  .navbar-item a {
-    color: white;
-    background-color:#ffffff2e;
-    border-radius: 6px;
-    padding-inline: 10px;
-    padding-block: 3px;
-  }
-  .navbar-item a:hover {
-    background-color:#ffffff4d;
-  }
   .navbar-item__button {
     color: white;
     background-color:#ffffff2e;

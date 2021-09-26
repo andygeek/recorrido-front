@@ -89,6 +89,7 @@ const AuthModule : Module<AuthState, RootState> = {
     getToken({commit}) {
       if(localStorage.getItem('token')) {
         commit('setToken', localStorage.getItem('token'))
+        router.push('/dashboard')
       } else {
         commit('setToken', null)
       }
