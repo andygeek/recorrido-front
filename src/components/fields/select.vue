@@ -1,12 +1,13 @@
 <template>
   <div class="select-field__container">
     <span class="select-field__label">{{name}}:</span>
-    <select class="select-field__input" name="cars" id="cars">
-      <option value="volvo">Volvo</option>
-      <option value="saab">Saab</option>
-      <option value="mercedes">Mercedes</option>
-      <option value="audi">Audi</option>
-    </select>
+    <input class="select-field__input" list="brow">
+    <datalist id="brow">
+      <option value="volvo"></option>
+      <option value="saab"></option>
+      <option value="mercedes"></option>
+      <option value="audi"></option>
+    </datalist>
   </div>
 </template>
 <script lang="ts">
@@ -33,7 +34,7 @@ export default class SelectField extends Vue {
   border-radius: 5px;
   padding-inline: 10px;
   margin-block: 5px;
-  width: 300px;
+  width: 280px;
 }
 .select-field__input:focus{
     outline: none;

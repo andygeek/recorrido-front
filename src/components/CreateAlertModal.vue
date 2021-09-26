@@ -16,6 +16,9 @@
           <select-field name="Clase"></select-field>
           <number-field name="Precio"></number-field>
         </div>
+        <div class="create-modal__footer">
+          <button class="create-modal__button">Crear</button>
+        </div>
       </div>
     </div>
   </transition>
@@ -107,5 +110,26 @@ export default class CreateAlertModal extends Vue {
   flex-wrap: wrap;
   justify-content: space-between;
   row-gap: 10px;
+}
+.create-modal__button {
+  border: none;
+  height: 30px;
+  border-radius: 5px;
+  width: fit-content;
+  padding-inline: 20px;
+  font-size: 15px;
+  padding-block: 5px;
+  cursor: pointer;
+  background: linear-gradient(90deg, rgb(3 81 179) 8%, rgb(114 164 208) 95%);
+  color: white;
+}
+.create-modal__button:hover {
+  background: linear-gradient(90deg, rgb(18 68 131) 8%, rgb(38 140 230) 95%);;
+}
+.create-modal__footer {
+  padding-inline: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: end;
 }
 </style>
