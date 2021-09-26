@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import DashboardRoot from '../views/environment/index.vue'
 import Signup from '../views/Signup.vue'
 import store from '../store'
+import AlertDetail from '../views/environment/AlertDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,11 @@ const routes: Array<RouteConfig> = [
     path: '/signup',
     name: 'Signup',
     component: Signup
+  },
+  {
+    path: '/alert/:id',
+    name: 'Alert',
+    component: AlertDetail
   }
 ]
 
