@@ -30,6 +30,10 @@ const AuthModule : Module<AuthState, RootState> = {
       }
       state.user! = user
     },
+    logout() {
+      localStorage.removeItem('token')
+      location.reload()
+    }
   },
   actions: {
     async login({ commit }, user) {
@@ -85,6 +89,9 @@ const AuthModule : Module<AuthState, RootState> = {
       } else {
         commit('setToken', null)
       }
+    },
+    logout ({ commit }) {
+      commit('logout')
     }
   },
 }

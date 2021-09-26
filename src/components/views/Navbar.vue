@@ -6,14 +6,17 @@
           <span class="navbar-logo__text-logo">recorrido.cl</span>
         </router-link>
       </div>
-      <li class="navbar-item">
+      <li class="navbar-item" v-if="activeSession">
         <router-link to="/login">Ingresar</router-link>
       </li>
-      <li class="navbar-item">
+      <li class="navbar-item" v-if="activeSession">
         <router-link to="/signup">Registrarse</router-link>
       </li>
       <li class="navbar-item">
         <router-link to="/dashboard">Dashboard</router-link>
+      </li>
+      <li class="navbar-item">
+        <button class="navbar-item__button" @click="logout">Cerrar Sesion</button>
       </li>
     </ul>
   </nav>
@@ -24,6 +27,14 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component
 export default class ViewNavbar extends Vue {
 
+  get activeSession() {
+    if ( this.$store.state["auth"].user !== undefined ) return true
+    return false
+  }
+
+  logout() {
+    this.$store.dispatch('auth/logout')
+  }
 }
 </script>
 <style scoped>
@@ -57,6 +68,22 @@ export default class ViewNavbar extends Vue {
     padding-block: 3px;
   }
   .navbar-item a:hover {
+    background-color:#ffffff4d;
+  }
+  .navbar-item__button {
+    color: white;
+    background-color:#ffffff2e;
+    border-radius: 6px;
+    padding-inline: 10px;
+    padding-block: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    border: none;
+    padding-block: 4px;
+  }
+  .navbar-item__button:hover {
     background-color:#ffffff4d;
   }
 </style>
