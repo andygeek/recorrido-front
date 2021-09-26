@@ -1,11 +1,12 @@
 <template>
   <div class="dashboard-view__container">
     <div class="dashboard_view__content">
-      <h2>En esta web puedes crear alerta de precios para cualquier viaje que quieras hacer en bus.</h2>
+      <h1 class="dashboard-view__title">Hola {{ user && user.name }}</h1>
+      <h2 class="dashboard-view__subtitle">En esta web puedes crear alerta de precios para cualquier viaje que quieras hacer en bus.</h2>
     </div>
     <button @click="openModal">Crear alerta de precios</button>
-    <div class="alert-price__table">
-      <div>alerta de precios: 111</div>
+    <div v-if="listAlerts" class="alert-price__table">
+      <div>{{listAlerts}}</div>
     </div>
     <create-alert-modal :open.sync="createModalOpen"></create-alert-modal>
   </div>
@@ -14,6 +15,8 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import CreateAlertModal from '@/components/CreateAlertModal.vue'
+import BackService from '@/services/BackService'
+import { PriceAlert } from '@/models'
 
 @Component({
   components: {
@@ -23,8 +26,8 @@ import CreateAlertModal from '@/components/CreateAlertModal.vue'
 export default class Dashboard extends Vue {
 
   createModalOpen : boolean = false
-  listAlerts = []
-
+  service : BackService | null = null
+  listAlerts : any[] |undefined = []
 
   openModal() {
     this.createModalOpen = true
@@ -33,6 +36,20 @@ export default class Dashboard extends Vue {
   created() {
     let token = this.$store.state["auth"].token
     this.$store.dispatch('auth/dashboard', token)
+    this.service = new BackService(token)
+  }
+
+  get user() {
+    return this.$store.getters['auth/user']
+  }
+
+  async mounted() {
+    try {
+      let response = await this.service?.getPriceAlerts(this.$store.state["auth"].user.id)
+      this.listAlerts = response!.data
+    } catch (e) {
+      console.log(e)
+    }
   }
 
 }
@@ -46,5 +63,9 @@ export default class Dashboard extends Vue {
   }
   .dashboard_view__content {
     margin: 20px;
+    font-family: sans-serif;
+  }
+  .dashboard-view__subtitle {
+    font-weight: 300;
   }
 </style>

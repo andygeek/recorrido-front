@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
-import Dashboard from '../views/Dashboard.vue'
+import DashboardRoot from '../views/environment/index.vue'
 import Signup from '../views/Signup.vue'
 import store from '../store'
 
@@ -22,7 +22,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: Dashboard,
+    component: DashboardRoot,
     meta: { requireAuth: true }
   },
   {

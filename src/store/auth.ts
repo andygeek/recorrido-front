@@ -26,6 +26,7 @@ const AuthModule : Module<AuthState, RootState> = {
     },
     setUser (state, payload) {
       let user: User = {
+        id: payload.id,
         name: payload.name,
         email: payload.email,
       }
@@ -46,7 +47,7 @@ const AuthModule : Module<AuthState, RootState> = {
         })
         const userDB = await res.json()
         commit('setToken', userDB.token)
-        commit('setUser', { name: userDB.name, email: userDB.email })
+        commit('setUser', { id: userDB.id, name: userDB.name, email: userDB.email })
         localStorage.setItem('token', userDB.token)
         router.push('/dashboard')
       } catch(e) {
@@ -64,7 +65,7 @@ const AuthModule : Module<AuthState, RootState> = {
         })
         const userDB = await res.json()
         commit('setToken', userDB.token)
-        commit('setUser', { name: userDB.name, email: userDB.email })
+        commit('setUser', { id: userDB.id, name: userDB.name, email: userDB.email })
         localStorage.setItem('token', userDB.token)
         router.push('/dashboard')
       } catch (error) {
@@ -81,7 +82,7 @@ const AuthModule : Module<AuthState, RootState> = {
           },
         })
         const userDB = await res.json()
-        commit('setUser', { name: userDB.name, email: userDB.email })
+        commit('setUser', { id: userDB.id, name: userDB.name, email: userDB.email })
       } catch (error) {
         console.log('Error: ', error)
       }
@@ -101,6 +102,9 @@ const AuthModule : Module<AuthState, RootState> = {
   getters: {
     token(state) {
       return state.token
+    },
+    user(state) {
+      return state.user
     }
   }
 }

@@ -1,14 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
+import store from '../store'
 
-interface SingupParams {
-  name: string,
-  email: string,
-  password: string,
-}
-interface LoginParams {
-  email: string,
-  password: string,
-}
 interface CreateAlertParams {
   name: string,
   origin_id: number,
@@ -21,23 +13,16 @@ interface CreateAlertParams {
 export default class BackService {
   apiBack : AxiosInstance;
 
-  constructor () {
+  constructor ( public token : string) {
     this.apiBack = axios.create({
-      baseURL: 'http://127.0.0.1:3000',
+      baseURL: process.env.VUE_APP_BACKBASE,
       withCredentials: false,
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        'Authorization': token
       }
     })
-  }
-
-  signup(signup_params: SingupParams) {
-    return this.apiBack.post('/users/signup', signup_params)
-  }
-  
-  login(login_params: LoginParams) {
-    return this.apiBack.post('/users/login', login_params)
   }
 
   createPriceAlert(create_params: CreateAlertParams) {
