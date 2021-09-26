@@ -31,7 +31,7 @@
               <td>{{alert.class_id}}</td>
               <td>{{alert.price}}</td>
               <td class="table-body__actions-container">
-                <div @click="toAlertDetail(alert.id)" class="alert-row__action-show">
+                <div @click="toAlertDetail(alert)" class="alert-row__action-show">
                   <img src="/image/search.png" alt="">
                 </div>
                 <div class="alert-row__action-remove">
@@ -53,6 +53,8 @@ import { Component, Vue } from "vue-property-decorator";
 import CreateAlertModal from "@/components/CreateAlertModal.vue";
 import BackService from "@/services/BackService";
 import router from "@/router";
+import AlertDetail from "./AlertDetail.vue";
+import { PriceAlert } from '@/models/PriceAlert'
 
 @Component({
   components: {
@@ -89,8 +91,8 @@ export default class Dashboard extends Vue {
     }
   }
 
-  toAlertDetail(id_alert : string) {
-    router.push({ name: 'Alert', params: { id: id_alert } })
+  toAlertDetail(alert : any ) {
+    router.push({ name: 'Alert', params: { id: alert.id?.toString()!, alert: alert } })
   }
 }
 </script>

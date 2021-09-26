@@ -34,7 +34,8 @@ const routes: Array<RouteConfig> = [
   {
     path: '/alert/:id',
     name: 'Alert',
-    component: AlertDetail
+    component: AlertDetail,
+    props: true
   }
 ]
 
