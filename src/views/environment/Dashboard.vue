@@ -30,7 +30,14 @@
               <td>{{alert.destiny_id}}</td>
               <td>{{alert.class_id}}</td>
               <td>{{alert.price}}</td>
-              <td>Acciones</td>
+              <td class="table-body__actions-container">
+                <div class="alert-row__action-show">
+                  <img src="/image/search.png" alt="">
+                </div>
+                <div class="alert-row__action-remove">
+                  <img src="/image/remove.png" alt="">
+                </div>
+              </td>
             </tr>
           </template>
         </tbody>
@@ -120,6 +127,7 @@ export default class Dashboard extends Vue {
 .dashboard-view__table {
   width: 100%;
   border: 2px solid #4882d3b8;
+  background-color: #ffffffc7;
 }
 .dashboard-view__table-header {
   background-color: #0f60b4;
@@ -137,5 +145,17 @@ export default class Dashboard extends Vue {
 }
 .dashboard-view__table-body tr > td:nth-child(n+2) {
   text-align: center;
+}
+.alert-row__action-show {
+  cursor: pointer;
+}
+.alert-row__action-remove {
+  cursor: pointer;
+}
+.table-body__actions-container {
+  height: inherit;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 </style>
