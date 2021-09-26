@@ -1,13 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-
-interface CreateAlertParams {
-  name: string,
-  origin_id: number,
-  destiny_id: number,
-  class_id: number,
-  price: number,
-  user_id: number
-}
+import { PriceAlert } from '@/models/PriceAlert';
 
 export default class BackService {
   apiBack : AxiosInstance;
@@ -24,7 +16,7 @@ export default class BackService {
     })
   }
 
-  createPriceAlert(create_params: CreateAlertParams) {
+  createPriceAlert(create_params: PriceAlert) {
     return this.apiBack.post('/price_alerts', create_params)
   }
 

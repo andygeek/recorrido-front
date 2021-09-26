@@ -17,7 +17,7 @@
           <number-field name="Precio" :write.sync="price"></number-field>
         </div>
         <div class="create-modal__footer">
-          <button class="create-modal__button">Crear</button>
+          <button class="create-modal__button" @click="createPriceAlert">Crear</button>
         </div>
       </div>
     </div>
@@ -31,6 +31,7 @@ import NumberField from './fields/number.vue'
 import BackService from '@/services/BackService'
 import { City } from '@/models/City'
 import { Clase } from '@/models/Clase'
+import { PriceAlert } from '@/models';
 
 @Component({
   components: {
@@ -70,6 +71,11 @@ export default class CreateAlertModal extends Vue {
 
   closeModal() {
     this.modalOpen = false
+    this.name = ''
+    this.origin_id = 0
+    this.destiny_id = 0
+    this.class_id = 0
+    this.price = 0
   }
 
   created() {
@@ -79,6 +85,21 @@ export default class CreateAlertModal extends Vue {
   async mounted() {
     let response = await this.service?.getCities()
     this.cities = response!.data.cities
+  }
+
+  async createPriceAlert() {
+    console.log('xas')
+    let body : PriceAlert = {
+      name: this.name,
+      origin_id: this.origin_id,
+      destiny_id: this.destiny_id,
+      class_id: this.class_id,
+      price: this.price,
+      user_id: this.$store.state.auth.user.id
+    }
+    let response = this.service?.createPriceAlert(body)
+    console.log(response)
+    this.closeModal()
   }
 }
 </script>
