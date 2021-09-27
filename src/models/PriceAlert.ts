@@ -11,4 +11,5 @@ export interface PriceAlert {
   class_name: string
   price: number
   user_id: number
+  created_at?: string
 }

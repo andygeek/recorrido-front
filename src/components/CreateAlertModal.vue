@@ -187,6 +187,6 @@ export default class CreateAlertModal extends Vue {
   padding-inline: 10px;
   margin-bottom: 20px;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 </style>

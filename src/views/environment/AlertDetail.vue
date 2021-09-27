@@ -20,6 +20,10 @@
             <div class="alert-detail__info-label">Precio:</div>
             <div class="alert-detail__info-text">{{alert.price}}</div>
           </div>
+          <div class="alert-detail__info-text">
+            <div class="alert-detail__info-label">Fecha de Creación:</div>
+            <div class="alert-detail__info-text">{{dateCreated}}</div>
+          </div>
         </div>
       </div>
       <div class="alert-detail__chart-container">
@@ -58,6 +62,7 @@ import { PriceAlert } from "@/models/PriceAlert"
 import { Chart as Chartjs, registerables  } from 'chart.js'
 import BackService from "@/services/BackService";
 import router from "@/router";
+import moment from 'moment'
 
 @Component({
   components: {},
@@ -68,6 +73,9 @@ export default class AlertDetail extends Vue {
   service : BackService | null = null
   listMinPrices = []
   getDataBucle : any
+  myChart : any = null
+  chartData : any = { labels: this.labels, datasets: this.dataset }
+  chartOptions : any
 
   created() {
     let token = this.$store.state["auth"].token;
@@ -80,7 +88,6 @@ export default class AlertDetail extends Vue {
   }
 
   mounted() {
-    console.log(this.alert)
     this.renderChart()
     this.updateTable()
     // Update every 5 minutes
@@ -97,9 +104,31 @@ export default class AlertDetail extends Vue {
     router.push({ name: 'External' })
   }
 
-  myChart : any = null
-  chartData : any = { labels: ['a', 'b'], datasets: [{label: 'a', data: 5}, {label: 'b', data: 6}] }
-  chartOptions : any
+  get labels() {
+    let dates = []
+    let dateStr = this.alert.created_at?.split("T")[0]
+    let dateCreated = moment(dateStr, "YYYY-MM-DD")
+    dates.push(dateCreated.format("YYYY-MM-DD").toString())
+    for (let index = 0; index < 6; index++) {
+      dateCreated.add(1, 'days')
+      dates.push(dateCreated.format("YYYY-MM-DD").toString())
+    }
+    return dates
+  }
+
+  get dataset() {
+    let dataArray :any[] = []
+    if (this.listMinPrices.length > 0) {
+      this.labels.forEach( (e, i) => {
+        let dateForLabel : any = this.listMinPrices.find((el:any) => el.created_at?.split("T")[0] == e )
+        dataArray.push(dateForLabel.min_price)
+      })
+    }
+    return [{
+      label: "Precios mínimos",
+      data: dataArray
+    }]
+  }
 
   @Watch('chartData')
   renderChart(){
@@ -111,6 +140,11 @@ export default class AlertDetail extends Vue {
       data: this.chartData,
       options: this.chartOptions
     });
+  }
+
+  get dateCreated() {
+    let created = this.alert.created_at?.split("T")[0]  
+    return moment(created, "YYYY-MM-DD").format("YYYY-MM-DD").toString()
   }
 }
 </script>
