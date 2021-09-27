@@ -6,15 +6,15 @@
         <div class="alert-detail__info-content">
           <div class="alert-detail__info-text">
             <div class="alert-detail__info-label">Origen:</div>
-            <div class="alert-detail__info-text">{{alert.origin_id}}</div>
+            <div class="alert-detail__info-text">{{alert.origin_name}}</div>
           </div>
           <div class="alert-detail__info-text">
             <div class="alert-detail__info-label">Destino:</div>
-            <div class="alert-detail__info-text">{{alert.destiny_id}}</div>
+            <div class="alert-detail__info-text">{{alert.destiny_name}}</div>
           </div>
           <div class="alert-detail__info-text">
             <div class="alert-detail__info-label">Clase:</div>
-            <div class="alert-detail__info-text">{{alert.class_id}}</div>
+            <div class="alert-detail__info-text">{{alert.class_name}}</div>
           </div>
           <div class="alert-detail__info-text">
             <div class="alert-detail__info-label">Precio:</div>
@@ -42,7 +42,7 @@
             <tr @click="loadExternal" :key="i" :class="{'active' : min.min_price < alert.price ? true : false}">
               <td>{{min.date_fetch}}</td>
               <td>{{min.hour}}</td>
-              <td>{{min.class_id}}</td>
+              <td>{{min.class_name}}</td>
               <td>{{min.min_price}}</td>
               <td>{{min.buss_operator_name}}</td>
             </tr>
@@ -136,6 +136,7 @@ export default class AlertDetail extends Vue {
   font-family: sans-serif;
   font-weight: bold;
   font-size: 20px;
+  text-transform: uppercase;
 }
 .alert-detail__info-text {
   font-family: sans-serif;

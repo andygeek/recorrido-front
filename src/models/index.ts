@@ -11,5 +11,13 @@ export {
 } from './City'
 
 export {
-  Clase
-} from './Clase'
+  BusClass
+} from './BusClass'
+
+export {
+  Destiny
+} from './Destiny'
+
+export {
+  Origin
+} from './Origin'

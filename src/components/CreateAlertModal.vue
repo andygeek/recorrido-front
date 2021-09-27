@@ -11,9 +11,9 @@
         </header>
         <div class="create-modal__body">
           <string-field name="Nombre" :write.sync="name"></string-field>
-          <select-field name="Origen" :list="cities" :select.sync="origin_id"></select-field>
-          <select-field name="Destino" :list="cities" :select.sync="destiny_id"></select-field>
-          <select-field name="Clase" :list="classes" :select.sync="class_id"></select-field>
+          <select-field name="Origen" :list="cities" :select.sync="origin"></select-field>
+          <select-field name="Destino" :list="cities" :select.sync="destiny"></select-field>
+          <select-field name="Clase" :list="classes" :select.sync="busClass"></select-field>
           <number-field name="Precio" :write.sync="price"></number-field>
         </div>
         <div class="create-modal__footer">
@@ -29,9 +29,7 @@ import SelectField from './fields/select.vue'
 import StringField from './fields/string.vue'
 import NumberField from './fields/number.vue'
 import BackService from '@/services/BackService'
-import { City } from '@/models/City'
-import { Clase } from '@/models/Clase'
-import { PriceAlert } from '@/models';
+import { City, PriceAlert, Origin, Destiny, BusClass } from '@/models'
 
 @Component({
   components: {
@@ -48,12 +46,12 @@ export default class CreateAlertModal extends Vue {
   cities : City[] = []
 
   name : string = ''
-  origin_id : number = 0
-  destiny_id : number = 0
-  class_id : number = 0
+  origin : Origin | null = null
+  destiny : Destiny | null = null
+  busClass : BusClass | null = null
   price : number = 0
 
-  classes : Clase[] = [
+  classes : BusClass[] = [
     { id: 1, name: "Premium"},
     { id: 2, name: "Salón Cama"},
     { id: 3, name: "Semi Cama"},
@@ -72,9 +70,9 @@ export default class CreateAlertModal extends Vue {
   closeModal() {
     this.modalOpen = false
     this.name = ''
-    this.origin_id = 0
-    this.destiny_id = 0
-    this.class_id = 0
+    this.origin = null
+    this.destiny = null
+    this.busClass = null
     this.price = 0
   }
 
@@ -91,9 +89,14 @@ export default class CreateAlertModal extends Vue {
     console.log('xas')
     let body : PriceAlert = {
       name: this.name,
-      origin_id: this.origin_id,
-      destiny_id: this.destiny_id,
-      class_id: this.class_id,
+      origin_id: this.origin!.id,
+      origin_name: this.origin!.name,
+      origin_url_name: this.origin!.url_name,
+      destiny_id: this.destiny!.id,
+      destiny_name: this.destiny!.name,
+      destiny_url_name: this.destiny!.url_name,
+      class_id: this.busClass!.id,
+      class_name: this.busClass!.name,
       price: this.price,
       user_id: this.$store.state.auth.user.id
     }

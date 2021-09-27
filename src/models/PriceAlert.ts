@@ -8,6 +8,7 @@ export interface PriceAlert {
   destiny_name: string
   destiny_url_name: string
   class_id: number
+  class_name: string
   price: number
   user_id: number
 }

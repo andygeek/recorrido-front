@@ -26,9 +26,9 @@
           <template v-for="(alert, i) in listAlerts">
             <tr :key="i">
               <td>{{alert.name}}</td>
-              <td>{{alert.origin_id}}</td>
-              <td>{{alert.destiny_id}}</td>
-              <td>{{alert.class_id}}</td>
+              <td>{{alert.origin_name}}</td>
+              <td>{{alert.destiny_name}}</td>
+              <td>{{alert.class_name}}</td>
               <td>{{alert.price}}</td>
               <td class="table-body__actions-container">
                 <div @click="toAlertDetail(alert)" class="alert-row__action-show">
@@ -53,8 +53,6 @@ import { Component, Vue } from "vue-property-decorator";
 import CreateAlertModal from "@/components/CreateAlertModal.vue";
 import BackService from "@/services/BackService";
 import router from "@/router";
-import AlertDetail from "./AlertDetail.vue";
-import { PriceAlert } from '@/models/PriceAlert'
 
 @Component({
   components: {

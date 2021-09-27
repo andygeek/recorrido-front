@@ -1,4 +1,4 @@
-export interface Clase {
+export interface BusClass {
   id: number
   name: string
 }

@@ -16,7 +16,7 @@ export default class SelectField extends Vue {
   select : any = null
 
   set selection(v: any) {
-    this.$emit('update:select', v.id)
+    this.$emit('update:select', v)
     this.select = v
   }
 
