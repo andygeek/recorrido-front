@@ -23,7 +23,6 @@ export default class ExternalView extends Vue {
   htmlBody : any = null
 
   created() {
-    console.log('x')
     this.service = new BackService(this.$store.state["auth"].token)
   }
 
@@ -46,7 +45,6 @@ export default class ExternalView extends Vue {
     `
     let response : any = await this.service?.getWebPage()
     this.htmlBody = response.data
-    console.log(this.htmlBody)
   }
 
   beforeDestroy() {

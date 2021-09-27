@@ -73,6 +73,8 @@ export default class alertPriceModal extends Vue {
       this.busClass = null
     }
     else  {
+      this.name = this.alert.name
+      this.price = this.alert.price
       this.origin = {
         id: this.alert.origin_id,
         name: this.alert.origin_name,
@@ -108,7 +110,6 @@ export default class alertPriceModal extends Vue {
   }
 
   created() {
-    console.log('aaa')
     this.service = new BackService(this.$store.state.auth.token)
   }
 
@@ -117,8 +118,28 @@ export default class alertPriceModal extends Vue {
     this.cities = response!.data.cities
   }
 
-  savePriceAlert() {
-
+  async savePriceAlert() {
+    let body : PriceAlert = {
+      name: this.name,
+      origin_id: this.origin!.id,
+      origin_name: this.origin!.name,
+      origin_url_name: this.origin!.url_name,
+      destiny_id: this.destiny!.id,
+      destiny_name: this.destiny!.name,
+      destiny_url_name: this.destiny!.url_name,
+      class_id: this.busClass!.id,
+      class_name: this.busClass!.name,
+      price: this.price,
+      user_id: this.$store.state.auth.user.id
+    }
+    
+    try {
+      await this.service?.updatePriceAlert(this.alert.id, body)
+      this.$emit('submit')
+      this.closeModal()
+    } catch(e) {
+      console.log(e)
+    }
   }
 
   async createPriceAlert() {

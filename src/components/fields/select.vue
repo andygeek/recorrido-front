@@ -15,7 +15,6 @@ export default class SelectField extends Vue {
   @Prop({ type: Object, required: false }) value !: any
 
   set selection(v: any) {
-    console.log('x', v)
     this.$emit('update:select', v)
   }
 

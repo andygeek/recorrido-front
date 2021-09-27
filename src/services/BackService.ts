@@ -39,4 +39,8 @@ export default class BackService {
   deletePriceAlert(priceAlertId : number) {
     return this.apiBack.delete('/price_alerts/' + priceAlertId)
   }
+
+  updatePriceAlert(priceAlertId : number, body: any) {
+    return this.apiBack.put('/price_alerts/' + priceAlertId, body)
+  }
 }
