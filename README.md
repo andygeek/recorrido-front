@@ -2,9 +2,9 @@
 
 Recorrido front es un proyecto, con el que podremos crear nuestras alertas de precios usando el API público de [Recorrido.cl](https://www.recorrido.cl/en). Esta plataforma está construida bajo [Vuejs 2](https://vuejs.org/) y [TypeScript](https://www.typescriptlang.org/) en sus cimientos y para los gráficos se utilizó la librería [Chart.js](https://www.chartjs.org/).
 
-Se trató de ser lo más modular posible por lo que se trabajo usando componentes para los campos del formulario string, select y number. Además de un componente para el Navbar y la para el formulario de Creación y Edición de las alertas de precios.
+Se trató de ser lo más modular posible por lo que se trabajo usando componentes para los campos del formulario **string**, **select** y **number**. Además de un componente para el **Navbar** y la para el **formulario de Creación y Edición** de las alertas de precios.
 
-Las vistas se componen de las vistas para el login y registro de usuario Login, Signup y las vistas de ambiente que cubren Dashboard vista donde mostramos las alerta creadas del usuario. AlertDetail donde mostramos el detalle de cada alerta. Y ExternalView que es una vista donde renderizamos la vista externa que debemos usar de recorrido.cl.
+Las vistas se componen de las vistas para el login y registro de usuario **Login**, **Signup** y las vistas de ambiente que cubren **Dashboard** vista donde mostramos las alerta creadas del usuario. **AlertDetail** donde mostramos el detalle de cada alerta. Y **ExternalView** que es una vista donde renderizamos la vista externa que debemos usar de recorrido.cl.
 
 ## 1. Casos de uso
 
