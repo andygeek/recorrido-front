@@ -44,8 +44,8 @@
         <tbody class="alert-detail__table-body">
           <template v-for="(min, i) in listMinPrices">
             <tr @click="loadExternal" :key="i" :class="{'active' : min.min_price < alert.price ? true : false}">
-              <td>{{min.date_fetch}}</td>
-              <td>{{min.hour}}</td>
+              <td>{{min.date_departure}}</td>
+              <td>{{min.hour.split("T")[1].split(".")[0]}}</td>
               <td>{{min.class_name}}</td>
               <td>{{min.min_price}}</td>
               <td>{{min.buss_operator_name}}</td>
@@ -74,8 +74,14 @@ export default class AlertDetail extends Vue {
   listMinPrices = []
   getDataBucle : any
   myChart : any = null
-  chartData : any = { labels: this.labels, datasets: this.dataset }
-  chartOptions : any
+  chartData : any = []
+  chartOptions : any = {
+    scales: { 
+      x: { ticks: { color: 'black', font: { size: 13 } } },
+      y: { ticks: { color: 'black', font: { size: 14 } } } },
+    plugins: {
+      legend: { display: false }, tooltip: { enabled: false } } }
+
 
   created() {
     let token = this.$store.state["auth"].token;
@@ -85,6 +91,7 @@ export default class AlertDetail extends Vue {
   async updateTable() {
     let response : any = await this.service?.getMinPrice(this.alert.id!)
     this.listMinPrices = response.data
+    this.chartData = { labels: this.labels, datasets: this.dataset }
   }
 
   mounted() {
@@ -120,13 +127,14 @@ export default class AlertDetail extends Vue {
     let dataArray :any[] = []
     if (this.listMinPrices.length > 0) {
       this.labels.forEach( (e, i) => {
-        let dateForLabel : any = this.listMinPrices.find((el:any) => el.created_at?.split("T")[0] == e )
-        dataArray.push(dateForLabel.min_price)
+        let dateForLabel : any = this.listMinPrices.find((el:any) => el.date_departure == e )
+        if (dateForLabel) dataArray.push(dateForLabel.min_price)
       })
     }
     return [{
       label: "Precios mínimos",
-      data: dataArray
+      data: dataArray,
+      borderColor: 'rgb(75, 192, 192)'
     }]
   }
 
