@@ -39,7 +39,7 @@
         </thead>
         <tbody class="alert-detail__table-body">
           <template v-for="(min, i) in listMinPrices">
-            <tr :key="i" :class="{'active' : min.min_price < alert.price ? true : false}">
+            <tr @click="loadExternal" :key="i" :class="{'active' : min.min_price < alert.price ? true : false}">
               <td>{{min.date_fetch}}</td>
               <td>{{min.hour}}</td>
               <td>{{min.class_id}}</td>
@@ -57,6 +57,7 @@ import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 import { PriceAlert } from "@/models/PriceAlert"
 import { Chart as Chartjs, registerables  } from 'chart.js'
 import BackService from "@/services/BackService";
+import router from "@/router";
 
 @Component({
   components: {},
@@ -90,6 +91,10 @@ export default class AlertDetail extends Vue {
     // Clean interval
     clearInterval(this.getDataBucle)
     this.getDataBucle = undefined
+  }
+
+  loadExternal() {
+    router.push({ name: 'External' })
   }
 
   myChart : any = null

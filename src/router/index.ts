@@ -6,6 +6,7 @@ import DashboardRoot from '../views/environment/index.vue'
 import Signup from '../views/Signup.vue'
 import store from '../store'
 import AlertDetail from '../views/environment/AlertDetail.vue'
+import ExternalWeb from '../views/environment/ExternalView.vue'
 
 Vue.use(VueRouter)
 
@@ -36,6 +37,12 @@ const routes: Array<RouteConfig> = [
     name: 'Alert',
     component: AlertDetail,
     props: true
+  },
+  {
+    path: '/external',
+    name: 'External',
+    component: ExternalWeb,
+    meta: { requireAuth: true }
   }
 ]
 
