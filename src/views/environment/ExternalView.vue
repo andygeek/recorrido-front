@@ -48,19 +48,8 @@ export default class ExternalView extends Vue {
     .container-fluid {
       background-color: white;
     }
-    #bus-travel-header-primary {
-      height: 2500px;
-    }
-    #promotions-carousel {
-      position: relative;
-    }
-    #bus-search-form {
-      position: relative;
-      top: 80px;
-      left: 50%;
-    }
-    #promotions-carousel .form-texts.row.container {
-      top: auto;
+    #app main[role="main"] {
+      margin-top: 300px;
     }
     `
     let body = {
