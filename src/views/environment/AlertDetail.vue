@@ -43,7 +43,7 @@
         </thead>
         <tbody class="alert-detail__table-body">
           <template v-for="(min, i) in listMinPrices">
-            <tr @click="loadExternal" :key="i" :class="{'active' : min.min_price < alert.price ? true : false}">
+            <tr @click="loadExternal(min.date_departure)" :key="i" :class="{'active' : min.min_price < alert.price ? true : false}">
               <td>{{min.date_departure}}</td>
               <td>{{min.hour.split("T")[1].split(".")[0]}}</td>
               <td>{{min.class_name}}</td>
@@ -107,8 +107,8 @@ export default class AlertDetail extends Vue {
     this.getDataBucle = undefined
   }
 
-  loadExternal() {
-    router.push({ name: 'External' })
+  loadExternal(date: string) {
+    router.push({ name: 'External' , params: { origin: this.alert.origin_url_name, destiny: this.alert.destiny_url_name, date: date } })
   }
 
   get labels() {

@@ -9,8 +9,9 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Prop } from 'vue-property-decorator';
 import BackService from "@/services/BackService";
+import moment from 'moment'
 
 @Component({
   components: {
@@ -18,6 +19,11 @@ import BackService from "@/services/BackService";
   }
 })
 export default class ExternalView extends Vue {
+  @Prop({ type: String, default: '' }) origin !: string
+  @Prop({ type: String, default: '' }) destiny !: string
+  @Prop({ type: String, default: '' }) date !: string
+
+
 
   service : BackService | null = null
   htmlBody : any = null
@@ -42,8 +48,30 @@ export default class ExternalView extends Vue {
     .container-fluid {
       background-color: white;
     }
+    #bus-travel-header-primary {
+      height: 2500px;
+    }
+    #promotions-carousel {
+      position: relative;
+    }
+    #bus-search-form {
+      position: relative;
+      top: 80px;
+      left: 50%;
+    }
+    #promotions-carousel .form-texts.row.container {
+      top: auto;
+    }
     `
-    let response : any = await this.service?.getWebPage()
+    let body = {
+      web: {
+        origin: this.origin,
+        destiny: this.destiny,
+        date: moment(this.date, "YYYY-MM-DD").format("DD-MM-YYYY").toString()
+      }
+    }
+
+    let response : any = await this.service?.getWebPage(body)
     this.htmlBody = response.data
   }
 

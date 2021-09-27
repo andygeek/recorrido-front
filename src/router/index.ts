@@ -42,7 +42,8 @@ const routes: Array<RouteConfig> = [
     path: '/external',
     name: 'External',
     component: ExternalWeb,
-    meta: { requireAuth: true }
+    meta: { requireAuth: true },
+    props: true
   }
 ]
 

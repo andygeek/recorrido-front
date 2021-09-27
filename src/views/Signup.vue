@@ -13,7 +13,7 @@
         </div>
         <div class="signup-view__input-container">
           <span class="signup-view__label-text">Password:</span>
-          <input class="signup-view__input-text" type="text" v-model="password">
+          <input class="signup-view__input-text" type="password" v-model="password">
         </div>
         <button class="signup-view__submit-button" @click="signup">Registrarse</button>
       </div>

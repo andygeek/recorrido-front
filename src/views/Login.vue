@@ -9,7 +9,7 @@
         </div>
         <div class="login-view__input-container">
           <span class="login-view__label-text">Password:</span>
-          <input class="login-view__input-text" type="text" v-model="password">
+          <input class="login-view__input-text" type="password" v-model="password">
         </div>
         <button class="login-view__submit-button" @click="login">Ingresar</button>
       </div>
