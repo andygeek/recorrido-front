@@ -27,4 +27,8 @@ export default class BackService {
   getCities() {
     return this.apiBack.get('/cities')
   }
+
+  getMinPrice(priceAlertId : number) {
+    return this.apiBack.get('/min_prices/' + priceAlertId )
+  }
 }

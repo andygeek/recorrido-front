@@ -66,19 +66,29 @@ export default class AlertDetail extends Vue {
 
   service : BackService | null = null
   listMinPrices = []
+  getDataBucle : any
 
   created() {
     let token = this.$store.state["auth"].token;
     this.service = new BackService(token)
   }
 
-  async update() {
-    // let response = await this.service.
+  async updateTable() {
+    let response : any = await this.service?.getMinPrice(this.alert.id!)
+    console.log('min', response.data)
   }
 
   mounted() {
     console.log(this.alert)
     this.renderChart()
+    // Update every 5 minutes
+    this.getDataBucle = setInterval(this.updateTable, 300000)
+  }
+
+  beforeDestroy() {
+    // Clean interval
+    clearInterval(this.getDataBucle)
+    this.getDataBucle = undefined
   }
 
   myChart : any = null
