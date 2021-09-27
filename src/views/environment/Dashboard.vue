@@ -34,6 +34,9 @@
                 <div @click="toAlertDetail(alert)" class="alert-row__action-show">
                   <img src="/image/search.png" alt="">
                 </div>
+                <div @click="toEditAlert(alert)" class="alert-row__action-show">
+                  <img src="/image/pencil.png" alt="">
+                </div>
                 <div @click="removeAlert(alert.id)" class="alert-row__action-remove">
                   <img src="/image/remove.png" alt="">
                 </div>
@@ -44,25 +47,27 @@
       </table>
     </div>
 
-    <create-alert-modal :open.sync="createModalOpen" @submit="updateTable"></create-alert-modal>
+    <alert-price-modal :open.sync="createModalOpen" @submit="updateTable" :type="modalType" :alert="editAlert" ></alert-price-modal>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import CreateAlertModal from "@/components/CreateAlertModal.vue";
+import AlertPriceModal from "@/components/AlertPriceModal.vue";
 import BackService from "@/services/BackService";
 import router from "@/router";
 
 @Component({
   components: {
-    CreateAlertModal,
+    AlertPriceModal,
   },
 })
 export default class Dashboard extends Vue {
   createModalOpen: boolean = false;
+  modalType: string = 'create'
   service: BackService | null = null;
   listAlerts: any[] | undefined = [];
+  editAlert: any = null 
 
   openModal() {
     this.createModalOpen = true;
@@ -81,6 +86,12 @@ export default class Dashboard extends Vue {
   toAlertDetail(alert : any ) {
     router.push({ name: 'Alert', params: { id: alert.id?.toString()!, alert: alert } })
   }
+
+  toEditAlert (alert: any) {
+    this.editAlert = alert
+    this.modalType = 'edit'
+    this.createModalOpen = true
+  } 
 
   async updateTable() {
     try {

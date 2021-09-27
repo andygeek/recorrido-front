@@ -6,7 +6,7 @@
         role="dialog"
       >
         <header class="create-modal__header">
-          <div class="create-modal__title">Crear alerta de precio</div>
+          <div class="create-modal__title">{{type == 'create' ? 'Crear Alerta de precio' : 'Editar Alerta de precio'}}</div>
           <button type="button" class="create-modal__button-close" @click="closeModal">X</button>
         </header>
         <div class="create-modal__body">
@@ -16,8 +16,11 @@
           <select-field name="Clase" :list="classes" :select.sync="busClass"></select-field>
           <number-field name="Precio" :write.sync="price"></number-field>
         </div>
-        <div class="create-modal__footer">
+        <div v-if="type == 'create'" class="create-modal__footer">
           <button class="create-modal__button" @click="createPriceAlert">Crear</button>
+        </div>
+        <div v-else class="create-modal__footer">
+          <button class="create-modal__button" @click="createPriceAlert">Guardar</button>
         </div>
       </div>
     </div>
@@ -38,9 +41,12 @@ import { City, PriceAlert, Origin, Destiny, BusClass } from '@/models'
     NumberField
   }
 })
-export default class CreateAlertModal extends Vue {
+export default class alertPriceModal extends Vue {
   @Prop({ type: Boolean, required: true }) open !: boolean
   @Prop({ type: String, required: false }) title !: String
+  @Prop({ type: String, required: false }) type !: String
+  @Prop({ type: Object, required: false }) alert !: Object
+
 
   service : BackService | null = null
   cities : City[] = []
