@@ -75,12 +75,13 @@ export default class AlertDetail extends Vue {
 
   async updateTable() {
     let response : any = await this.service?.getMinPrice(this.alert.id!)
-    console.log('min', response.data)
+    this.listMinPrices = response.data
   }
 
   mounted() {
     console.log(this.alert)
     this.renderChart()
+    this.updateTable()
     // Update every 5 minutes
     this.getDataBucle = setInterval(this.updateTable, 300000)
   }
