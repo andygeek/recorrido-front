@@ -86,7 +86,6 @@ export default class CreateAlertModal extends Vue {
   }
 
   async createPriceAlert() {
-    console.log('xas')
     let body : PriceAlert = {
       name: this.name,
       origin_id: this.origin!.id,
@@ -100,9 +99,13 @@ export default class CreateAlertModal extends Vue {
       price: this.price,
       user_id: this.$store.state.auth.user.id
     }
-    let response = this.service?.createPriceAlert(body)
-    console.log(response)
-    this.closeModal()
+    try {
+      await this.service?.createPriceAlert(body)
+      this.$emit('submit')
+      this.closeModal()
+    } catch(e) {
+      console.log(e)
+    }
   }
 }
 </script>

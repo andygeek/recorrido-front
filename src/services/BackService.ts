@@ -35,4 +35,8 @@ export default class BackService {
   getWebPage() {
     return this.apiBack.get('/external_web')
   }
+
+  deletePriceAlert(priceAlertId : number) {
+    return this.apiBack.delete('/price_alerts/' + priceAlertId)
+  }
 }

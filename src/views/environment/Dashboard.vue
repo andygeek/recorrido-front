@@ -34,7 +34,7 @@
                 <div @click="toAlertDetail(alert)" class="alert-row__action-show">
                   <img src="/image/search.png" alt="">
                 </div>
-                <div class="alert-row__action-remove">
+                <div @click="removeAlert(alert.id)" class="alert-row__action-remove">
                   <img src="/image/remove.png" alt="">
                 </div>
               </td>
@@ -44,7 +44,7 @@
       </table>
     </div>
 
-    <create-alert-modal :open.sync="createModalOpen"></create-alert-modal>
+    <create-alert-modal :open.sync="createModalOpen" @submit="updateTable"></create-alert-modal>
   </div>
 </template>
 
@@ -74,11 +74,15 @@ export default class Dashboard extends Vue {
     this.service = new BackService(token);
   }
 
-  get user() {
-    return this.$store.getters["auth/user"];
+  mounted() {
+    this.updateTable()
   }
 
-  async mounted() {
+  toAlertDetail(alert : any ) {
+    router.push({ name: 'Alert', params: { id: alert.id?.toString()!, alert: alert } })
+  }
+
+  async updateTable() {
     try {
       let response = await this.service?.getPriceAlerts(
         this.$store.state["auth"].user.id
@@ -89,9 +93,20 @@ export default class Dashboard extends Vue {
     }
   }
 
-  toAlertDetail(alert : any ) {
-    router.push({ name: 'Alert', params: { id: alert.id?.toString()!, alert: alert } })
+  async removeAlert(id :number) {
+    try {
+      await this.service?.deletePriceAlert(id)
+      this.updateTable()
+    } catch (e) {
+      console.log(e)
+    }
   }
+
+  get user() {
+    return this.$store.getters["auth/user"];
+  }
+
+
 }
 </script>
 <style scoped>
