@@ -7,7 +7,7 @@
         quieras hacer en bus.
       </h2>
       <div class="dashboard-view__button-container">
-        <button @click="openModal" class="dashboard-view__button">
+        <button @click="openModalCreate" class="dashboard-view__button">
           Crear alerta de precios
         </button>
       </div>
@@ -34,7 +34,7 @@
                 <div @click="toAlertDetail(alert)" class="alert-row__action-show">
                   <img src="/image/search.png" alt="">
                 </div>
-                <div @click="toEditAlert(alert)" class="alert-row__action-show">
+                <div @click="openModalEdit(alert)" class="alert-row__action-show">
                   <img src="/image/pencil.png" alt="">
                 </div>
                 <div @click="removeAlert(alert.id)" class="alert-row__action-remove">
@@ -69,7 +69,9 @@ export default class Dashboard extends Vue {
   listAlerts: any[] | undefined = [];
   editAlert: any = null 
 
-  openModal() {
+  openModalCreate() {
+    this.editAlert = null
+    this.modalType = 'create'
     this.createModalOpen = true;
   }
 
@@ -87,7 +89,7 @@ export default class Dashboard extends Vue {
     router.push({ name: 'Alert', params: { id: alert.id?.toString()!, alert: alert } })
   }
 
-  toEditAlert (alert: any) {
+  openModalEdit (alert: any) {
     this.editAlert = alert
     this.modalType = 'edit'
     this.createModalOpen = true

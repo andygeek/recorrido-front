@@ -12,16 +12,15 @@ import { City } from '@/models/City'
 export default class SelectField extends Vue {
   @Prop({ type: String, required: true }) name !: String
   @Prop({ type: Array, required: false }) list !: Array<City>
-
-  select : any = null
+  @Prop({ type: Object, required: false }) value !: any
 
   set selection(v: any) {
+    console.log('x', v)
     this.$emit('update:select', v)
-    this.select = v
   }
 
   get selection() {
-    return this.select
+    return this.value
   }
 
 }

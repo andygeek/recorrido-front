@@ -1,7 +1,7 @@
 <template>
   <div class="number-field__container">
     <span class="number-field__label">{{name}}:</span>
-    <input class="number-field__input" type="search" v-model="write">
+    <input class="number-field__input" type="search" v-model="currentValue">
   </div>
 </template>
 <script lang="ts">
@@ -9,17 +9,15 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 
 @Component({})
 export default class NumberField extends Vue {
-  @Prop({ type: String, required: true }) name !: String
+  @Prop({ type: String, required: true }) name !: string
+  @Prop({ type: String, required: false }) value !: string
 
-  value : string = ''
-
-  set write(v: any) {
-    this.$emit('update:write', v)
-    this.value = v
+  get currentValue () {
+    return this.value
   }
 
-  get write() {
-    return this.value
+  set currentValue (value : string) {
+    this.$emit('update:write', value)
   }
 }
 </script>

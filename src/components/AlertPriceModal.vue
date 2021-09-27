@@ -10,17 +10,17 @@
           <button type="button" class="create-modal__button-close" @click="closeModal">X</button>
         </header>
         <div class="create-modal__body">
-          <string-field name="Nombre" :write.sync="name"></string-field>
-          <select-field name="Origen" :list="cities" :select.sync="origin"></select-field>
-          <select-field name="Destino" :list="cities" :select.sync="destiny"></select-field>
-          <select-field name="Clase" :list="classes" :select.sync="busClass"></select-field>
-          <number-field name="Precio" :write.sync="price"></number-field>
+          <string-field name="Nombre" :write.sync="name" :value="alert && alert.name"></string-field>
+          <select-field name="Origen" :list="cities" :select.sync="origin" :value="origin"></select-field>
+          <select-field name="Destino" :list="cities" :select.sync="destiny" :value="destiny"></select-field>
+          <select-field name="Clase" :list="classes" :select.sync="busClass" :value="busClass"></select-field>
+          <number-field name="Precio" :write.sync="price" :value="alert && alert.price"></number-field>
         </div>
         <div v-if="type == 'create'" class="create-modal__footer">
           <button class="create-modal__button" @click="createPriceAlert">Crear</button>
         </div>
         <div v-else class="create-modal__footer">
-          <button class="create-modal__button" @click="createPriceAlert">Guardar</button>
+          <button class="create-modal__button" @click="savePriceAlert">Guardar</button>
         </div>
       </div>
     </div>
@@ -43,16 +43,16 @@ import { City, PriceAlert, Origin, Destiny, BusClass } from '@/models'
 })
 export default class alertPriceModal extends Vue {
   @Prop({ type: Boolean, required: true }) open !: boolean
-  @Prop({ type: String, required: false }) title !: String
-  @Prop({ type: String, required: false }) type !: String
-  @Prop({ type: Object, required: false }) alert !: Object
+  @Prop({ type: String, required: false }) title !: string
+  @Prop({ type: String, required: false }) type !: string
+  @Prop({ type: Object, required: false }) alert !: any
 
 
   service : BackService | null = null
   cities : City[] = []
 
   name : string = ''
-  origin : Origin | null = null
+  origin : Origin | null =  null
   destiny : Destiny | null = null
   busClass : BusClass | null = null
   price : number = 0
@@ -64,6 +64,31 @@ export default class alertPriceModal extends Vue {
     { id: 4, name: "Pullman"},
     { id: 5, name: "Cualquiera"},
   ]
+
+  @Watch('open')
+  updateVariablesToEdit () {
+    if ( this.alert == null) {
+      this.origin = null
+      this.destiny = null
+      this.busClass = null
+    }
+    else  {
+      this.origin = {
+        id: this.alert.origin_id,
+        name: this.alert.origin_name,
+        url_name: this.alert.origin_url_name
+      }
+      this.destiny = {
+        id: this.alert.destiny_id,
+        name: this.alert.destiny_name,
+        url_name: this.alert.destiny_url_name
+      }
+      this.busClass = {
+        id: this.alert.class_id,
+        name: this.alert.class_name
+      }
+    } 
+  }
 
   get modalOpen () {
     return this.open
@@ -83,12 +108,17 @@ export default class alertPriceModal extends Vue {
   }
 
   created() {
+    console.log('aaa')
     this.service = new BackService(this.$store.state.auth.token)
   }
 
   async mounted() {
     let response = await this.service?.getCities()
     this.cities = response!.data.cities
+  }
+
+  savePriceAlert() {
+
   }
 
   async createPriceAlert() {
