@@ -2,8 +2,9 @@
   <div class="home-view__container">
     <div class="home-view__text-container">
       <h1 class="home-view__text-welcome">
-        Con recorrido.cl puedes crear tu alerta de precios en unos segundos.
+        Con <span class="recorrido-text">recorrido.cl</span> puedes crear tu alerta de precios en unos segundos. La tecnología al servicio de tus viajes.
       </h1>
+      <img src="/image/bus_img.png" alt="">
     </div>
   </div>
 </template>
@@ -18,18 +19,30 @@ export default class Home extends Vue {}
 .home-view__container {
   display:flex;
   justify-content:center;
+  align-items: center;
   height:100%;
 }
 .home-view__text-container {
-  width: 60%;
+  width: 100%;
+  height: 60%;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  background-color: #ffffffb8;
+  border-radius: 8px;
 }
 .home-view__text-welcome {
-  color: white;
+  width: 80%;
+  color: #242424;
   text-align: center;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  background-color: #0000004d;
+  font-size: 25px;
   padding: 10px;
+}
+img {
+  height: 300px;
+}
+.recorrido-text {
+  color: #04b7bf;
 }
 </style>
