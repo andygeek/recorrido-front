@@ -26,18 +26,55 @@
         <canvas class="chart" height="50" width="100" ref="chartjsCanvas"></canvas>
       </div>
     </div>
+    <div class="alert-detail__table-container">
+      <table cellspacing="0" cellpadding="0" class="alert-detail__table">
+        <thead class="alert-detail__table-header">
+          <tr>
+            <th>Fecha</th>
+            <th>Horario</th>
+            <th>Clase</th>
+            <th>Precio Mínimo</th>
+            <th>Empresa de bus</th>
+          </tr>
+        </thead>
+        <tbody class="alert-detail__table-body">
+          <template v-for="(min, i) in listMinPrices">
+            <tr :key="i" :class="{'active' : min.min_price < alert.price ? true : false}">
+              <td>{{min.date_fetch}}</td>
+              <td>{{min.hour}}</td>
+              <td>{{min.class_id}}</td>
+              <td>{{min.min_price}}</td>
+              <td>{{min.buss_operator_name}}</td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 import { PriceAlert } from "@/models/PriceAlert"
 import { Chart as Chartjs, registerables  } from 'chart.js'
+import BackService from "@/services/BackService";
 
 @Component({
   components: {},
 })
 export default class AlertDetail extends Vue {
   @Prop({ type: Object, default: '' }) alert !: PriceAlert
+
+  service : BackService | null = null
+  listMinPrices = []
+
+  created() {
+    let token = this.$store.state["auth"].token;
+    this.service = new BackService(token)
+  }
+
+  async update() {
+    // let response = await this.service.
+  }
 
   mounted() {
     console.log(this.alert)
@@ -98,5 +135,27 @@ export default class AlertDetail extends Vue {
   flex-direction: column;
   gap: 10px;
   margin-top: 20px;
+}
+.alert-detail__table-container {
+  margin: 20px;
+}
+.alert-detail__table {
+  width: 100%;
+  border: 2px solid #4882d3b8;
+  background-color: #ffffffc7;
+}
+.alert-detail__table-header {
+  background-color: #0f60b4;
+  color: white;
+  height: 40px;
+}
+.alert-detail__table-body tr td{
+  text-align: center;
+}
+.alert-detail__table-body tr {
+  height: 35px;
+}
+.alert-detail__table-body > tr.active {
+  background-color: #cddc39;
 }
 </style>
