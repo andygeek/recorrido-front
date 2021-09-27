@@ -8,7 +8,7 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 
 @Component({})
-export default class NumberField extends Vue {
+export default class StringField extends Vue {
   @Prop({ type: String, required: true }) name !: string
   @Prop({ type: String, required: false }) value !: string
 

@@ -56,6 +56,7 @@ import { Component, Vue } from "vue-property-decorator";
 import AlertPriceModal from "@/components/AlertPriceModal.vue";
 import BackService from "@/services/BackService";
 import router from "@/router";
+import { PriceAlert } from "@/models"
 
 @Component({
   components: {
@@ -66,8 +67,8 @@ export default class Dashboard extends Vue {
   createModalOpen: boolean = false;
   modalType: string = 'create'
   service: BackService | null = null;
-  listAlerts: any[] | undefined = [];
-  editAlert: any = null 
+  listAlerts: PriceAlert[] | undefined = [];
+  editAlert: PriceAlert | null = null 
 
   openModalCreate() {
     this.editAlert = null
