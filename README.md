@@ -1,6 +1,10 @@
-# recorrido-front
+# Recorrido-front
 
-...
+Recorrido front es un proyecto, con el que podremos crear nuestras alertas de precios usando el API publico de Recorrido.cl. Esta plataforma esta construida bajo Vuejs 2 y TypeScript en sus simientos y para los gráficos se utilizo la librería Chart.js.
+
+Se trato de ser lo más modular posible por lo que se trabajo usando componentes para los campos del formulario `string`, `select` y `number`. Además de un componente para el Navbar y la para el formulario de Creación y Edición de las laertas de precios.
+
+Las vistas se componen de las vistas para el login y registro de usuario `Login`, `Signup` y las vistas de ambiente que cubren `Dashboard` vista donde mostramos las alerta creadas del usuario.  `AlertDetail` donde mostramos el detalle de cada alerta. Y `ExternalView` que es una vista donde renderizamos la vista externa que debemos usar de recorrido.cl.
 
 ## 1. Casos de uso
 
@@ -10,27 +14,28 @@
 
 <img src="https://imgur.com/LmsO7by.png" width="600"/>
 
-## 3. Project setup
+## 3. Instalación del proyecto
+
+Para instalar y probar este proyecto solo basta con clonar el repositorio de git y usar el siguiente comando. Es importante tener el administrador de paquetes Yarn o NPM instalado en tu computadora.
+
 ```
-npm install
+yarn
 ```
 
-### Compiles and hot-reloads for development
+Luego podemos ejecutarlo de forma local usando el siguiente comando.
+
+
 ```
-npm run serve
+yarn run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Tenemos alunas pruebas unitarias creadas, si quieres correrlas utiliza el siguiente comando.
 
-### Run your unit tests
 ```
 npm run test:unit
 ```
 
-## Demos
+## 4. Demos
 
 Esto es una demo del funcionamiento del front. 
 
