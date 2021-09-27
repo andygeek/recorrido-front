@@ -31,4 +31,8 @@ export default class BackService {
   getMinPrice(priceAlertId : number) {
     return this.apiBack.get('/min_prices/' + priceAlertId )
   }
+
+  getWebPage() {
+    return this.apiBack.get('/external_web')
+  }
 }
