@@ -29,7 +29,7 @@ Luego podemos ejecutarlo de forma local usando el siguiente comando.
 yarn run serve
 ```
 
-Tenemos alunas pruebas unitarias creadas, si quieres correrlas utiliza el siguiente comando.
+Tengan por seguro que mejoraré haciendo pruebas unitarias :books: :books: 
 
 ```
 yarn run test:unit
